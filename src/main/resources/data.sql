@@ -18,14 +18,26 @@ insert into room (name, room_type, capacity, hourly_price, active, street, city,
     ('Biuro 101',       'PRIVATE_OFFICE',  4,  70.00, true,  'Plac Grunwaldzki 10', 'Wrocław', '50-384'),
     ('Open Space Desk', 'OPEN_SPACE',      1,  25.00, false, 'Krasińskiego 1',      'Wrocław', '50-449');
 
--- ===== LAB 02 · booking =====
-insert into booking (room_name, start_time, end_time, total_price, confirmed) values
-    ('Sala Diamentowa', '2026-11-01 10:00:00', '2026-11-01 14:00:00', 480.00, true),
-    ('Biuro 101',       '2026-11-02 09:00:00', '2026-11-02 17:00:00', 560.00, true),
-    ('Open Space Desk', '2026-11-03 12:00:00', '2026-11-03 15:00:00', 75.00,  false);
+-- ===== LAB 03 · equipment =====
+insert into equipment (name, category, quantity_total, available) values
+    ('Projektor 4K Epson', 'AV', 5, true),
+    ('Tablica suchościeralna', 'OFFICE', 10, true),
+    ('Ekspres ciśnieniowy', 'KITCHEN', 3, true);
 
 -- ===== LAB 02 · client =====
-insert into client (full_name, email, phone, company_name, registered_on) values
-    ('Jan Kowalski',  'jan.kowalski@example.com', '600100200', 'Tech Solutions', '2026-10-01'),
-    ('Anna Nowak',    'anna.nowak@startup.io',    '501202303', null,             '2026-10-15'),
-    ('Piotr Zielony', 'piotr@freelance.pl',       null,        'Piotr Dev',      '2026-10-20');
+insert into client (full_name, email, phone, company_name, registered_on, user_account_id) values
+    ('Jan Kowalski', 'jan.kowalski@example.com', '600100200', 'Tech Solutions', '2026-10-01', 5),
+    ('Anna Nowak', 'anna.nowak@startup.io', '501202303', null, '2026-10-15', 6),
+    ('Piotr Zielony', 'piotr@freelance.pl', null, 'Piotr Dev', '2026-10-20', 7);
+
+-- ===== LAB 03 · booking =====
+insert into booking (room_id, client_id, start_time, end_time, total_price, confirmed) values
+    (1, 1, '2026-11-01 10:00:00', '2026-11-01 14:00:00', 480.00, true),
+    (2, 2, '2026-11-02 09:00:00', '2026-11-02 17:00:00', 560.00, true),
+    (1, 3, '2026-11-03 12:00:00', '2026-11-03 15:00:00', 360.00, false);
+
+-- ===== LAB 03 · room_equipment =====
+insert into room_equipment (room_id, equipment_id) values
+    (1, 1),
+    (1, 2),
+    (2, 3);

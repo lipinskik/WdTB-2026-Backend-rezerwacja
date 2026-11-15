@@ -1,7 +1,13 @@
 package pl.wsb.rezerwacja.room.entity;
 
 import jakarta.persistence.*;
+import pl.wsb.rezerwacja.booking.entity.Booking;
+
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "room")
@@ -30,6 +36,17 @@ public class Room {
     @Embedded
     private Address address;
 
+    @OneToMany(mappedBy = "room")
+    private List<Booking> bookings = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "room_equipment",
+            joinColumns = @JoinColumn(name = "room_id"),
+            inverseJoinColumns = @JoinColumn(name = "equipment_id")
+    )
+    private Set<Equipment> equipments = new HashSet<>();
+
     protected Room() {
     }
 
@@ -50,4 +67,6 @@ public class Room {
     public BigDecimal getHourlyPrice() { return hourlyPrice; }
     public Boolean getActive() { return active; }
     public Address getAddress() { return address; }
+    public List<Booking> getBookings() { return bookings; }
+    public Set<Equipment> getEquipments() { return equipments; }
 }
